@@ -31,3 +31,21 @@ INSERT INTO Employees (first_name, last_name,title, salary, department, manager)
 VALUES ("William","Adams","Sales Lead",10000,"Sales","kimmy wong");
 
 select*from Employees;
+SELECT e1.id, e1.first_name, e1.last_name, role.title, department.name AS department, 
+role.salary, CONCAT(e2.first_name, ' ', e2.last_name) AS manager FROM employees as e1
+  LEFT JOIN role on e1.role_id = role.id
+  LEFT JOIN department on role.department_id = department.id
+  LEFT JOIN employees as e2 on e2.id = e1.manager_id;
+
+
+
+
+
+
+
+
+
+
+
+
+

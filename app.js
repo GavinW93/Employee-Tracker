@@ -1,5 +1,5 @@
 var inquirer = require("inquirer")
-const pass= "Itsoverkamo000"
+const pass= ""
 var mysql = require("mysql");
 
 // create the connection information for the sql database
@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "Itsoverkamo000",
+  password: "",
   database: "Employee_DB"
 });
 mainQuestion()
@@ -61,13 +61,12 @@ function mainQuestion(){
 //check  if it users adds employees
           if(answers.name=='Add Employee'){
             console.log('added emplyoees');
-            //HtmlCol= "#5F64D3";
            // removeEmployees()
           }
 //remove the employee
           if(answers.name=='remove Employees'){
             console.log('removed the Employees');
-            
+            selectDelete()
            // removeEmployees()
           }
 
@@ -118,3 +117,43 @@ function mainQuestion(){
       connection.end();*/
    
   }}
+
+
+function selectDelete(){
+//first get all the employee ids
+//then put it into 
+  
+let EmployeeDetail= connection.query("select first_name from Employees", function(err, res) {
+    if (err) {throw err;}
+    return res;
+  })
+if(EmployeeDetail) {
+  var question2 = [{
+    type: 'list',
+    name: 'name',
+    message: "which employee would you like to remove?",
+    choices: EmployeeDetail
+  }]
+  inquirer.prompt(question2).then(answers => {
+    if(answers){
+    console.log("working?")}
+       }) 
+}
+
+
+
+}
+
+
+/*
+  function DeletePerson(){
+    con.connect(function(err) {
+  if (err) throw err;
+  var sql = "DELETE FROM customers WHERE address = 'Mountain 21'";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Number of records deleted: " + result.affectedRows);
+  });
+});
+  }
+  */
