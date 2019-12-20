@@ -1,5 +1,4 @@
 const { prompt } = require("inquirer");
-const logo = require("asciiart-logo");
 const pass= ""
 const db = require("./db");
 
